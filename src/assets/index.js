@@ -20,6 +20,17 @@ import applePie from "../assets/products/Apple-Pie-Ice-Cream.png";
 import chocoCake from "../assets/products/Choco-Lava-Cake.png";
 import paneerTikka from "../assets/products/Paneer-Tikka.png";
 import greekSalad from "../assets/products/Greek-Salad.png";
+import bbqRibs from "../assets/products/BBQ-Ribs-Slaw.png";
+import berryPannaCotta from "../assets/products/Berry-Panna-Cotta.png";
+import beefStroganoff from "../assets/products/Beef-Stroganoff.png";
+import caramelFlan from "../assets/products/Caramel-Flan.png";
+import chickenAlfredo from "../assets/products/Chicken-Alfredo.png";
+import chickenTenders from "../assets/products/Chicken-Tenders.png";
+import classicTirimaisu from "../assets/products/Classic-Tiramisu.png";
+import herbGrilledFish from "../assets/products/Herb-Grilled-Fish.png";
+import LoadedNachos from "../assets/products/Loaded-Nachos.png";
+import spicyLambChops from "../assets/products/Spicy-Lamb-Chops.png";
+import strawberryCheesecake from "../assets/products/Strawberry-Cheesecake.png";
 
 /* Customers Profile Images */
 import male1 from "../assets/customers/male1.jpg";
@@ -127,6 +138,14 @@ export const chefs = [
   },
 ];
 
+export const productsCategories = [
+  "All",
+  "Main Dish",
+  "Side Dish",
+  "Salad",
+  "Dessert",
+];
+
 export const menuItems = [
   {
     id: 1,
@@ -181,6 +200,105 @@ export const menuItems = [
     discountPrice: 6.49,
     image: greekSalad,
     category: "Salad",
+  },
+  {
+    id: 7,
+    name: "BBQ Ribs & Slaw",
+    price: 17.99,
+    discountPercent: 0,
+    discountPrice: 17.99,
+    image: bbqRibs,
+    category: "Main Dish",
+  },
+  {
+    id: 8,
+    name: "Berry Panna Cotta",
+    price: 5.99,
+    discountPercent: 0,
+    discountPrice: 5.99,
+    image: berryPannaCotta,
+    category: "Dessert",
+  },
+  {
+    id: 9,
+    name: "Beef Stroganoff",
+    price: 15.99,
+    discountPercent: 0,
+    discountPrice: 15.99,
+    image: beefStroganoff,
+    category: "Main Dish",
+  },
+  {
+    id: 10,
+    name: "Caramel Flan",
+    price: 5.49,
+    discountPercent: 0,
+    discountPrice: 5.49,
+    image: caramelFlan,
+    category: "Dessert",
+  },
+  {
+    id: 11,
+    name: "Chicken Alfredo",
+    price: 13.99,
+    discountPercent: 0,
+    discountPrice: 13.99,
+    image: chickenAlfredo,
+    category: "Main Dish",
+  },
+  {
+    id: 12,
+    name: "Spicy Lamb Chops",
+    price: 19.99,
+    discountPercent: 0,
+    discountPrice: 19.99,
+    image: spicyLambChops,
+    category: "Main Dish",
+  },
+  {
+    id: 13,
+    name: "Herb Grilled Fish",
+    price: 16.49,
+    discountPercent: 0,
+    discountPrice: 16.49,
+    image: herbGrilledFish,
+    category: "Main Dish",
+  },
+  {
+    id: 14,
+    name: "Chicken Tenders",
+    price: 7.49,
+    discountPercent: 0,
+    discountPrice: 7.49,
+    image: chickenTenders,
+    category: "Side Dish",
+  },
+  {
+    id: 15,
+    name: "Classic Tiramisu",
+    price: 6.49,
+    discountPercent: 0,
+    discountPrice: 6.49,
+    image: classicTirimaisu,
+    category: "Dessert",
+  },
+  {
+    id: 16,
+    name: "Loaded Nachos",
+    price: 8.99,
+    discountPercent: 0,
+    discountPrice: 8.99,
+    image: LoadedNachos,
+    category: "Side Dish",
+  },
+  {
+    id: 17,
+    name: "Strawberry Cheesecake",
+    price: 6.99,
+    discountPercent: 0,
+    discountPrice: 6.99,
+    image: strawberryCheesecake,
+    category: "Dessert",
   },
 ];
 

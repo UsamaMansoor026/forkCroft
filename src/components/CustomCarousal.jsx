@@ -37,17 +37,24 @@ const CustomCarousal = () => {
               className="absolute top-0 left-0 w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 w-full h-full bg-black/40"></div>
+            <div className="absolute inset-0 w-full h-full bg-primary/60"></div>
 
-            <div className="absolute bottom-0 w-full h-[150px] bg-gradient-to-t from-bg-black/100 to-black/10"></div>
+            <div className="absolute bottom-0 w-full h-[150px] bg-gradient-to-t from-bg-primary via-primary/10 to-transparent"></div>
 
             <div className="text-center absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
               <h1 className="text-[70px] font-great-vibes text-heading">
                 ForkCroft
               </h1>
-              <h1 className="font-poppins uppercase text-primary-text font-semibold text-2xl md:text-4xl lg:text-5xl tracking-[3px] whitespace-nowrap">
+              <motion.h1
+                key={currentSlide}
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="font-poppins uppercase text-primary-text font-semibold text-2xl md:text-4xl lg:text-5xl tracking-[3px] whitespace-nowrap"
+              >
                 {hero_text[currentSlide]}
-              </h1>
+              </motion.h1>
             </div>
           </>
         )}

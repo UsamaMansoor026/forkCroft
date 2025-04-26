@@ -1,10 +1,15 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Service = ({ service }) => {
   return (
-    <article
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 * service.id }}
+      viewport={{ once: true, amount: 0.05 }}
       key={service.id}
-      className="flex flex-col gap-4 h-full bg-transparent backdrop-blur-2xl shadow-card p-6 rounded-xl"
+      className="flex flex-col gap-4 h-full bg-transparent backdrop-blur-2xl shadow-md shadow-primary p-6 rounded-xl duration-200 hover:shadow-lg"
     >
       <div className="text-center mb-4 text-captions text-6xl">
         <i className={service.icon}></i>
@@ -19,7 +24,7 @@ const Service = ({ service }) => {
           {service.description}
         </p>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

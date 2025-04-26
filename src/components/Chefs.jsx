@@ -32,7 +32,7 @@ const Chefs = () => {
 
             {/* Social Handles */}
 
-            <div className="absolute top-0 bottom-0 left-0 px-3 flex flex-col justify-center bg-gradient-to-r from-black/50 to-black/30 gap-4">
+            <div className="absolute top-0 bottom-0 -left-10 px-3 flex flex-col justify-center bg-gradient-to-r from-black/50 to-black/30 gap-4 group-hover:left-0 group-hover:duration-700">
               <a
                 href={chef.facebookHandle}
                 target="_blank"
