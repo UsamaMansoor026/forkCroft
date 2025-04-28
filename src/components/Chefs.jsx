@@ -15,7 +15,7 @@ const Chefs = () => {
         {chefs.map((chef) => (
           <article
             key={chef.id}
-            className="bg-white/10 shadow-white/30 shadow-md rounded-md overflow-hidden relative group"
+            className="bg-white/10 shadow-white/30 shadow-md rounded-md overflow-hidden relative group h-full"
           >
             {/* Image */}
             <div className="">
@@ -24,20 +24,21 @@ const Chefs = () => {
 
             {/* Content */}
             <div className="p-6 text-center">
-              <h3 className="text-primary-text font-semibold text-base md:text-xl">
+              <h3 className="text-primary-text font-semibold md:text-xl">
                 {chef.name}
               </h3>
-              <p className="text-sm text-captions">{chef.role}</p>
+              <p className="text-[12px] md:text-sm text-captions">
+                {chef.role}
+              </p>
             </div>
 
             {/* Social Handles */}
-
-            <div className="absolute top-0 bottom-0 -left-10 px-3 flex flex-col justify-center bg-gradient-to-r from-black/50 to-black/30 gap-4 group-hover:left-0 group-hover:duration-700">
+            <div className="absolute top-0 bottom-0 left-0 md:-left-10 px-3 flex flex-col justify-center bg-gradient-to-r from-primary-text/50 to-primary-text/30 gap-4 md:group-hover:left-0 md:group-hover:duration-700">
               <a
                 href={chef.facebookHandle}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg text-primary-text transition-all hover:text-heading"
+                className="text-lg text-primary transition-all hover:text-heading"
               >
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
@@ -45,7 +46,7 @@ const Chefs = () => {
                 href={chef.inatagramHandle}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg text-primary-text transition-all hover:text-heading"
+                className="text-lg text-primary transition-all hover:text-heading"
               >
                 <i className="fa-brands fa-instagram"></i>
               </a>
@@ -53,7 +54,7 @@ const Chefs = () => {
                 href={chef.twitterHandle}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg text-primary-text transition-all hover:text-heading"
+                className="text-lg text-primary transition-all hover:text-heading"
               >
                 <i className="fa-brands fa-x"></i>
               </a>

@@ -70,12 +70,12 @@ const NavLinks = () => {
           Contact
         </Link>
 
-        <button
-          type="button"
+        <Link
+          to="/login"
           className="bg-button px-10 py-3 shadow-sm hover:shadow-button-hover ml-3 cursor-pointer text-primary-text duration-200 hover:bg-button-hover w-full md:w-[max-content]"
         >
           Login
-        </button>
+        </Link>
 
         {/*  <button
         type="button"

@@ -45,6 +45,9 @@ import female4 from "../assets/customers/female4.jpg";
 import blog1 from "../assets/blogs/image_1.webp";
 import blog2 from "../assets/blogs/image_2.webp";
 import blog3 from "../assets/blogs/image_3.webp";
+import blog4 from "../assets/blogs/image_4.webp";
+import blog5 from "../assets/blogs/image_5.webp";
+import blog6 from "../assets/blogs/image_6.webp";
 
 /* Instagram Gallery */
 import insta1 from "../assets/instagram/insta-1.webp";
@@ -361,13 +364,10 @@ export const blogs = [
     date: "2025-04-13",
     image: blog1,
     content: `
-While our savory menu gets the applause, it’s our desserts that quietly win hearts.
-
-Whether it's the creamy *Velvet Chocolate Mousse* or the nostalgic *Warm Caramel Pudding*, we believe that a meal isn’t complete without a sweet finale.
-
-Our pastry chef, **Sara**, blends French techniques with local inspiration, using fresh ingredients and zero shortcuts. We also offer **gluten-free** and **eggless** options — because everyone deserves dessert.
-
-**Come hungry, but don’t forget to save room. Trust us.**
+      <p>While our savory menu gets the applause, it’s our desserts that quietly win hearts.</p>
+      <p>Whether it's the creamy <em>Velvet Chocolate Mousse</em> or the nostalgic <em>Warm Caramel Pudding</em>, we believe that a meal isn’t complete without a sweet finale.</p>
+      <p>Our pastry chef, <strong>Sara</strong>, blends French techniques with local inspiration, using fresh ingredients and zero shortcuts. We also offer <strong>gluten-free</strong> and <strong>eggless</strong> options — because everyone deserves dessert.</p>
+      <p><strong>Come hungry, but don’t forget to save room. Trust us.</strong></p>
     `,
   },
   {
@@ -376,13 +376,10 @@ Our pastry chef, **Sara**, blends French techniques with local inspiration, usin
     date: "2025-04-10",
     image: blog2,
     content: `
-At **ForkCroft**, grilling isn’t just cooking — it’s an art.
-
-Our chefs carefully marinate each cut of meat with a house-blend of spices passed down through generations. But what truly sets our grilled dishes apart is the way we sear them on open flames, locking in natural juices and smoky richness.
-
-From our famous *Grilled Beef with Potatoes* to *Spicy Chicken Skewers*, every bite reflects dedication and flavor. We don’t rush the process — slow grilling brings out unmatched tenderness and depth.
-
-**Next time you visit, ask us about the story behind your plate. Because every dish has one.**
+      <p>At <strong>ForkCroft</strong>, grilling isn’t just cooking — it’s an art.</p>
+      <p>Our chefs carefully marinate each cut of meat with a house-blend of spices passed down through generations. But what truly sets our grilled dishes apart is the way we sear them on open flames, locking in natural juices and smoky richness.</p>
+      <p>From our famous <em>Grilled Beef with Potatoes</em> to <em>Spicy Chicken Skewers</em>, every bite reflects dedication and flavor. We don’t rush the process — slow grilling brings out unmatched tenderness and depth.</p>
+      <p><strong>Next time you visit, ask us about the story behind your plate. Because every dish has one.</strong></p>
     `,
   },
   {
@@ -391,17 +388,55 @@ From our famous *Grilled Beef with Potatoes* to *Spicy Chicken Skewers*, every b
     date: "2025-04-16",
     image: blog3,
     content: `
-Planning a family dinner, anniversary, or corporate gathering? **Let us make it unforgettable.**
-
-We offer cozy private dining areas and curated menus perfect for every occasion. Our team ensures that from the first greeting to the final toast, your event feels personal and special.
-
-Choose from pre-set packages or work with our chef to create a custom menu — featuring crowd favorites like:
-
-- Creamy Alfredo Pasta  
-- Grilled Lamb Chops  
-- Tiramisu Cups
-
-**Your memories deserve a flavorful backdrop. Let’s plan something amazing together.**
+      <p>Planning a family dinner, anniversary, or corporate gathering? <strong>Let us make it unforgettable.</strong></p>
+      <p>We offer cozy private dining areas and curated menus perfect for every occasion. Our team ensures that from the first greeting to the final toast, your event feels personal and special.</p>
+      <p>Choose from pre-set packages or work with our chef to create a custom menu — featuring crowd favorites like:</p>
+      <ul>
+        <li>Creamy Alfredo Pasta</li>
+        <li>Grilled Lamb Chops</li>
+        <li>Tiramisu Cups</li>
+      </ul>
+      <p><strong>Your memories deserve a flavorful backdrop. Let’s plan something amazing together.</strong></p>
+    `,
+  },
+  {
+    id: 4,
+    title: "Fresh from the Farm: Our Ingredient Promise",
+    date: "2025-04-19",
+    image: blog4,
+    content: `
+      <p>Every dish at <strong>ForkCroft</strong> starts with a commitment — to use the freshest, locally-sourced ingredients possible.</p>
+      <p>We work closely with farmers and suppliers to ensure that our vegetables are crisp, meats are responsibly sourced, and dairy products are organic and pure.</p>
+      <p>It’s a promise you can taste in every bite, whether it's a hearty <em>Garden Veggie Lasagna</em> or a refreshing <em>Seasonal Berry Salad</em>.</p>
+      <p><strong>Real ingredients. Real flavors. Always.</strong></p>
+    `,
+  },
+  {
+    id: 5,
+    title: "Beyond Food: Our Cozy Dining Experience",
+    date: "2025-04-21",
+    image: blog5,
+    content: `
+      <p>Food nourishes the body, but ambiance nourishes the soul.</p>
+      <p>At <strong>ForkCroft</strong>, we designed our dining spaces to feel like a warm embrace — rustic interiors, soft lighting, and a soundtrack that soothes the heart.</p>
+      <p>Whether you’re on a date night or a casual brunch with friends, we want every visit to feel like home.</p>
+      <p><strong>Because the best meals are about more than just food — they're about how they make you feel.</strong></p>
+    `,
+  },
+  {
+    id: 6,
+    title: "Chef’s Picks: What We're Loving This Season",
+    date: "2025-04-24",
+    image: blog6,
+    content: `
+      <p>Our chefs are always experimenting, tasting, and refining — and this season, here’s what they can’t get enough of:</p>
+      <ul>
+        <li><em>Spiced Pumpkin Risotto</em> — Creamy, rich, and subtly sweet.</li>
+        <li><em>Honey-Glazed Duck Breast</em> — Perfectly seared with a citrus twist.</li>
+        <li><em>Rosemary Garlic Focaccia</em> — Freshly baked daily.</li>
+      </ul>
+      <p>Stop by and ask for the Chef’s Special — it changes weekly, and it never disappoints.</p>
+      <p><strong>New flavors await. Let your taste buds explore!</strong></p>
     `,
   },
 ];

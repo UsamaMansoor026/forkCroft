@@ -8,11 +8,6 @@ const MenuPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filteredItems, setFilteredItems] = useState(menuItems);
 
-  const filteredProducts =
-    selectedCategory === "All"
-      ? menuItems
-      : menuItems.filter((product) => product.category === selectedCategory);
-
   useEffect(() => {
     const filteredProducts =
       selectedCategory === "All"

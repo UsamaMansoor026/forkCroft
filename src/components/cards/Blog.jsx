@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Blog = ({ blog }) => {
   const formatDate = (dateStr) => {
@@ -33,9 +34,12 @@ const Blog = ({ blog }) => {
         </h4>
 
         {/* read more */}
-        <p className="duration-200 hover:underline w-fit cursor-pointer mt-4">
+        <Link
+          to={`/story/${blog.id}`}
+          className="duration-200 hover:underline w-fit cursor-pointer mt-4"
+        >
           Read more
-        </p>
+        </Link>
       </div>
     </article>
   );
