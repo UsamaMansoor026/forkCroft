@@ -11,8 +11,8 @@ const NavLinks = () => {
     setMobNav(!mobNav);
   };
 
-  const handleNavLinkClick = (link) => {
-    handleSetActiveLink(link);
+  const handleNavLinkClick = () => {
+    // handleSetActiveLink(link);
     setMobNav(false);
   };
 
@@ -28,7 +28,7 @@ const NavLinks = () => {
           className={`${
             activeLink === "home" ? "bg-primary-text/10 text-white" : ""
           } text-primary-text text-[14px] duration-200 hover:text-white  hover:bg-primary-text/10 cursor-pointer px-5 py-2 w-full md:w-[max-content]`}
-          onClick={() => handleNavLinkClick("home")}
+          onClick={handleNavLinkClick}
         >
           Home
         </Link>
@@ -38,7 +38,7 @@ const NavLinks = () => {
           className={`${
             activeLink === "about" ? "bg-primary-text/10 text-white" : ""
           } text-primary-text text-[14px] duration-200 hover:text-white  hover:bg-primary-text/10 cursor-pointer px-5 py-2 w-full md:w-[max-content]`}
-          onClick={() => handleNavLinkClick("about")}
+          onClick={handleNavLinkClick}
         >
           About
         </Link>
@@ -47,7 +47,7 @@ const NavLinks = () => {
           className={`${
             activeLink === "menu" ? "bg-primary-text/10 text-white" : ""
           } text-primary-text text-[14px] duration-200 hover:text-white  hover:bg-primary-text/10 cursor-pointer px-5 py-2 w-full md:w-[max-content]`}
-          onClick={() => handleNavLinkClick("menu")}
+          onClick={handleNavLinkClick}
         >
           Menu
         </Link>
@@ -56,7 +56,7 @@ const NavLinks = () => {
           className={`${
             activeLink === "stories" ? "bg-primary-text/10 text-white" : ""
           } text-primary-text text-[14px] duration-200 hover:text-white  hover:bg-primary-text/10 cursor-pointer px-5 py-2 w-full md:w-[max-content]`}
-          onClick={() => handleNavLinkClick("stories")}
+          onClick={handleNavLinkClick}
         >
           Stories
         </Link>
@@ -65,7 +65,7 @@ const NavLinks = () => {
           className={`${
             activeLink === "contact" ? "bg-primary-text/10 text-white" : ""
           } text-primary-text text-[14px] duration-200 hover:text-white  hover:bg-primary-text/10 cursor-pointer px-5 py-2 w-full md:w-[max-content]`}
-          onClick={() => handleNavLinkClick("contact")}
+          onClick={handleNavLinkClick}
         >
           Contact
         </Link>

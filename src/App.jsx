@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   About,
+  Cart,
   ContactPage,
   Home,
   Login,
@@ -13,9 +14,24 @@ import {
 import MainLayout from "./components/layouts/MainLayout";
 import AuthLayout from "./components/layouts/AuthLayout";
 
+import { Bounce, ToastContainer } from "react-toastify";
+
 const App = () => {
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -24,6 +40,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/story" element={<Stories />} />
           <Route path="/story/:id" element={<Story />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
 
         {/* AuthLayout */}

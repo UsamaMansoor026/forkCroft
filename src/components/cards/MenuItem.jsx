@@ -1,8 +1,21 @@
 import React from "react";
 import { useCartStore } from "../../store/store";
+import { toast } from "react-toastify";
 
 const MenuItem = ({ item }) => {
   const addToCart = useCartStore((state) => state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const cartItems = useCartStore((state) => state.cartItems);
+
+  const handleAddtoCart = (item) => {
+    addToCart(item);
+    toast.success("Item added to cart");
+  };
+
+  const isItemInCart = (itemId) => {
+    return cartItems.some((cartItem) => cartItem.id === itemId);
+  };
+
   return (
     <article
       key={item.id}
@@ -25,14 +38,30 @@ const MenuItem = ({ item }) => {
           </span>
         </div>
 
-        {/* Order Button */}
-        <button
-          type="button"
-          className="bg-cta border border-cta text-primary-text py-2.5 rounded-md cursor-pointer transition-all duration-200 hover:bg-transparent hover:shadow-2xs hover:shadow-cta"
-          onClick={() => addToCart(item)}
-        >
-          Order Now
-        </button>
+        {isItemInCart(item.id) ? (
+          <div className="flex items-center justify-between rounded-md overflow-hidden">
+            <i
+              className="fa-solid fa-minus bg-cta w-full text-center py-2.5 cursor-pointer rounded-l-md"
+              onClick={() => removeFromCart(item.id)}
+            />
+            <p className="w-full text-center py-2.5">
+              {cartItems.find((cartItem) => cartItem.id === item.id)
+                ?.quantity || 1}
+            </p>
+            <i
+              className="fa-solid fa-plus bg-cta w-full text-center py-2.5 cursor-pointer rounded-r-md"
+              onClick={() => addToCart(item)}
+            />
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="bg-cta border border-cta text-primary-text py-2.5 rounded-md cursor-pointer transition-all duration-200 hover:bg-transparent hover:shadow-2xs hover:shadow-cta"
+            onClick={() => handleAddtoCart(item)}
+          >
+            Order Now
+          </button>
+        )}
 
         {/* Quantity Controls */}
         {/* <div className="flex items-center justify-between rounded-md overflow-hidden">

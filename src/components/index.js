@@ -17,6 +17,7 @@ import InstagramGallery from "./InstagramGallery";
 import PageHeader from "./PageHeader";
 import ContactUsForm from "./ContactUsForm";
 import BackButton from "./BackButton";
+import CartItemsTable from "./CartItemsTable";
 
 export {
   CustomCarousal,
@@ -38,4 +39,5 @@ export {
   PageHeader,
   ContactUsForm,
   BackButton,
+  CartItemsTable,
 };

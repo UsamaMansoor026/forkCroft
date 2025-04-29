@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export const useCartStore = create((set) => ({
   cartItems: [],
+  totalItems: 0,
   addToCart: (item) =>
     set((state) => {
       const existingItemIndex = state.cartItems.findIndex(
@@ -9,13 +10,11 @@ export const useCartStore = create((set) => ({
       );
 
       if (existingItemIndex !== -1) {
-        // Item already exists → increment quantity
         const updatedCartItems = [...state.cartItems];
         updatedCartItems[existingItemIndex].quantity += 1;
 
         return { cartItems: updatedCartItems };
       } else {
-        // Item not found → add new with quantity 1
         return { cartItems: [...state.cartItems, { ...item, quantity: 1 }] };
       }
     }),
@@ -28,14 +27,22 @@ export const useCartStore = create((set) => ({
             if (item.quantity > 1) {
               return { ...item, quantity: item.quantity - 1 };
             }
-            // If quantity becomes 0, we'll remove it later in filter
             return null;
           }
           return item;
         })
-        .filter((item) => item !== null); // Remove items with quantity 0
+        .filter((item) => item !== null);
 
       return { cartItems: updatedCartItems };
     }),
   clearCart: () => set({ cartItems: [] }),
+  getTotalItems: () =>
+    set((state) => {
+      return {
+        totalItems: state.cartItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ),
+      };
+    }),
 }));
