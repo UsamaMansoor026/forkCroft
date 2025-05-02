@@ -43,7 +43,7 @@ const MainLayout = () => {
       <Link
         to="/cart"
         onClick={() => handleSetActiveLink("menu")}
-        className="fixed z-20 text-primary-text right-5 top-40 w-[50px] h-[50px] bg-primary-text/30 flex justify-center items-center rounded-full shadow-lg hover:bg-primary-text/50 transition-all duration-300 ease-in-out cursor-pointer backdrop-blur-xl"
+        className="fixed z-20 text-primary-text right-5 top-28 md:top-40 w-[50px] h-[50px] bg-primary-text/30 flex justify-center items-center rounded-full shadow-lg hover:bg-primary-text/50 transition-all duration-300 ease-in-out cursor-pointer backdrop-blur-xl"
       >
         <i className="fa-solid fa-shopping-cart"></i>
 

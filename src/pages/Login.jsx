@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { BackButton } from "../components";
 import { heroBg_images } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -15,9 +17,23 @@ const Login = () => {
       password: "",
     },
   });
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("data: ", data);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:2632/api/auth/login",
+        data
+      );
+      console.log("Response: ", response);
+      toast.success("User Logged in Successfully");
+      navigate("/");
+    } catch (err) {
+      console.error("Login failed:", err.response.data.message);
+      toast.error("Something went wrong!!");
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);

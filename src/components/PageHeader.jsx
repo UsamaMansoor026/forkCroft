@@ -24,7 +24,7 @@ const PageHeader = ({ heading, targetLink }) => {
       <div className="absolute inset-0 bg-primary/50" />
 
       {/* Back Button */}
-      <BackButton className="absolute top-40 left-3" />
+      <BackButton className="absolute top-28 md:top-40 left-3" />
 
       {/* Content */}
       <div className="text-primary-text absolute z-10 w-full bottom-16 flex flex-col items-center justify-center gap-3">

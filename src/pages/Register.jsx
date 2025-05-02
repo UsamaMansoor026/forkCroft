@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { BackButton } from "../components";
 import { heroBg_images } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,8 +21,21 @@ const Register = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("data: ", data);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:2632/api/auth/register",
+        data
+      );
+      console.log("Response: ", response);
+      toast.success("User Registered Successfully");
+      navigate("/");
+    } catch (err) {
+      console.error("Registration failed:", err.response.data.message);
+      toast.error("Something went wrong!!");
+    }
   };
 
   return (
@@ -39,7 +54,10 @@ const Register = () => {
       <BackButton className="absolute top-2 left-2 z-10" />
 
       {/* Login Form */}
-      <form className="max-w-[500px] w-full text-primary-text mx-auto border border-primary-text/20 backdrop-blur-sm p-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-[500px] w-full text-primary-text mx-auto border border-primary-text/20 backdrop-blur-sm p-5"
+      >
         {/* Logo */}
         <img src="/logo.png" alt="Fork Croft" className="w-16 h-16" />
         <h3 className="font-semibold text-xl">Create your account now</h3>
