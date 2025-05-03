@@ -70,7 +70,7 @@ const CartItemsTable = () => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
                     className="text-red-600 hover:text-red-900 ml-4 cursor-pointer"
-                    onClick={() => handleRemvoveFromCart(item.id)}
+                    onClick={() => removeFromCart(item.id)}
                   >
                     <i className="fa-solid fa-trash"></i>
                   </button>

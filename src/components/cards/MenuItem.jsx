@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useCartStore } from "../../store/store";
 import { toast } from "react-toastify";
+import { NavigationContext } from "../../context/NavigationContext";
 
 const MenuItem = ({ item }) => {
   const addToCart = useCartStore((state) => state.addToCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const cartItems = useCartStore((state) => state.cartItems);
 
+  const { currentUser } = useContext(NavigationContext);
+
   const handleAddtoCart = (item) => {
+    if (!currentUser) {
+      toast.error("User not logged in!");
+      return;
+    }
     addToCart(item);
     toast.success("Item added to cart");
   };

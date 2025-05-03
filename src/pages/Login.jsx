@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BackButton } from "../components";
 import { heroBg_images } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { NavigationContext } from "../context/NavigationContext";
 
 const Login = () => {
+  const { loginUser } = useContext(NavigationContext);
   const {
     register,
     handleSubmit,
@@ -28,8 +30,14 @@ const Login = () => {
         data
       );
       console.log("Response: ", response);
-      toast.success("User Logged in Successfully");
-      navigate("/");
+      if (response.status === 200) {
+        loginUser(response.data.user);
+        toast.success(response.data.message);
+
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (err) {
       console.error("Login failed:", err.response.data.message);
       toast.error("Something went wrong!!");

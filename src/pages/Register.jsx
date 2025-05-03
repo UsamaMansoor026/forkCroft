@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BackButton } from "../components";
 import { heroBg_images } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { NavigationContext } from "../context/NavigationContext";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { loginUser } = useContext(NavigationContext);
   const {
     register,
     handleSubmit,
@@ -30,7 +32,9 @@ const Register = () => {
         data
       );
       console.log("Response: ", response);
-      toast.success("User Registered Successfully");
+      if (response.status !== 201) return toast.error(response.data.message);
+      toast.success(response.data.message);
+      loginUser(response.data.user);
       navigate("/");
     } catch (err) {
       console.error("Registration failed:", err.response.data.message);

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavigationContext } from "../context/NavigationContext";
+import { toast } from "react-toastify";
 
 const NavLinks = () => {
-  const { activeLink, handleSetActiveLink } = useContext(NavigationContext);
+  const { activeLink, currentUser, logoutUser } = useContext(NavigationContext);
   // const [activeLink, setActiveLink] = useState("home");
   const [mobNav, setMobNav] = useState(false);
 
@@ -17,7 +18,8 @@ const NavLinks = () => {
   };
 
   const handleLogout = () => {
-    console.log("Logged Out");
+    logoutUser();
+    toast.success("Logged Out successfully!");
   };
 
   return (
@@ -75,52 +77,56 @@ const NavLinks = () => {
             Contact
           </Link>
 
-          <Link
-            to="/login"
-            className="bg-button px-10 py-3 shadow-sm hover:shadow-button-hover ml-3 cursor-pointer text-primary-text duration-200 hover:bg-button-hover w-full md:w-[max-content]"
-          >
-            Login
-          </Link>
+          {!currentUser && (
+            <Link
+              to="/login"
+              className="bg-button px-10 py-3 shadow-sm hover:shadow-button-hover ml-3 cursor-pointer text-primary-text duration-200 hover:bg-button-hover w-full md:w-[max-content]"
+            >
+              Login
+            </Link>
+          )}
         </ul>
 
         {/* User Profile */}
-        {/* <div className="absolute top-5 right-4 md:relative md:top-0 md:right-0 group">
-          <div className="">
-            <i className="fa-solid fa-user text-primary-text text-xl border border-primary-text rounded-full w-[40px] h-[40px] flex justify-center items-center text-center p-1 pt-2 backdrop-blur-xl cursor-pointer" />
-          </div>
+        {currentUser && (
+          <div className="absolute top-5 right-4 md:relative md:top-0 md:right-0 group">
+            <div className="">
+              <i className="fa-solid fa-user text-primary-text text-xl border border-primary-text rounded-full w-[40px] h-[40px] flex justify-center items-center text-center p-1 pt-2 backdrop-blur-xl cursor-pointer" />
+            </div>
 
-          <div className="bg-transparent absolute top-9 right-0 hidden group-hover:block transition-all duration-200 z-50">
-            <ul className="mt-8 w-64 bg-primary-text text-primary shadow-lg rounded-lg p-4 space-y-3">
-              <li className="font-semibold text-lg">Maan Mansoor</li>
-              <li className="text-sm text-captions">maan@gmail.com</li>
-              <hr />
-              <li>
-                <a
-                  href="/orders"
-                  className="text-primary block hover:underline"
-                >
-                  Orders
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/tablereservation"
-                  className="cursor-pointer text-primary text-left duration-200 hover:underline"
-                >
-                  Book a table
-                </a>
-              </li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="text-red-500 hover:underline w-full text-left"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
+            <div className="bg-transparent absolute top-9 right-0 hidden group-hover:block transition-all duration-200 z-50">
+              <ul className="mt-8 w-64 bg-primary-text text-primary shadow-lg rounded-lg p-4 space-y-3">
+                <li className="font-semibold text-lg">{currentUser?.name}</li>
+                <li className="text-sm text-captions">{currentUser?.email}</li>
+                <hr />
+                <li>
+                  <a
+                    href="/orders"
+                    className="text-primary block hover:underline"
+                  >
+                    Orders
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/tablereservation"
+                    className="cursor-pointer text-primary text-left duration-200 hover:underline"
+                  >
+                    Book a table
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="text-red-500 hover:underline cursor-pointer w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div> */}
+        )}
       </div>
 
       {/* Hamburger Menu */}
