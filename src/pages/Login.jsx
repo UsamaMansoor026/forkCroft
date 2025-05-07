@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { BackButton } from "../components";
+import { BackButton, SmallLoader } from "../components";
 import { heroBg_images } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { NavigationContext } from "../context/NavigationContext";
 
 const Login = () => {
   const { loginUser } = useContext(NavigationContext);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ const Login = () => {
     console.log("data: ", data);
 
     try {
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:2632/api/auth/login",
         data
@@ -41,6 +43,8 @@ const Login = () => {
     } catch (err) {
       console.error("Login failed:", err.response.data.message);
       toast.error("Something went wrong!!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -132,9 +136,14 @@ const Login = () => {
 
         <button
           type="submit"
-          className="border border-primary-text/20 bg-button w-full rounded-md px-2 py-3 focus:outline-none focus:border-primary-text/50 transition duration-200 hover:bg-button-hover cursor-pointer mb-5"
+          className={`border border-primary-text/20 bg-button w-full rounded-md px-2 py-3 focus:outline-none focus:border-primary-text/50 transition duration-200 hover:bg-button-hover mb-5 flex items-center justify-center gap-3 ${
+            loading
+              ? "cursor-not-allowed opacity-60"
+              : "cursor-pointer opacity-100"
+          }`}
+          disabled={loading}
         >
-          Login
+          Login {loading && <SmallLoader />}
         </button>
 
         <p className="text-sm text-captions">

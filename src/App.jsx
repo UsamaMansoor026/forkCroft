@@ -3,11 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import {
   About,
   Cart,
+  Checkout,
   ContactPage,
   Home,
   Login,
   MenuPage,
   Register,
+  Reservation,
   Stories,
   Story,
 } from "./pages";
@@ -41,6 +43,8 @@ const App = () => {
           <Route path="/story" element={<Stories />} />
           <Route path="/story/:id" element={<Story />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/reservation" element={<Reservation />} />
         </Route>
 
         {/* AuthLayout */}

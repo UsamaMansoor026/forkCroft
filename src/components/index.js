@@ -18,6 +18,8 @@ import PageHeader from "./PageHeader";
 import ContactUsForm from "./ContactUsForm";
 import BackButton from "./BackButton";
 import CartItemsTable from "./CartItemsTable";
+import CheckoutForm from "./CheckoutForm";
+import SmallLoader from "./SmallLoader";
 
 export {
   CustomCarousal,
@@ -40,4 +42,6 @@ export {
   ContactUsForm,
   BackButton,
   CartItemsTable,
+  CheckoutForm,
+  SmallLoader,
 };

@@ -6,14 +6,14 @@ const CartItemsTable = () => {
   const cartItems = useCartStore((state) => state.cartItems);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const addToCart = useCartStore((state) => state.addToCart);
-
-  const handleRemvoveFromCart = (itemId) => {
-    removeFromCart(itemId);
-    toast.success("Item removed from cart");
-  };
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const handleAddtoCart = (item) => {
     addToCart(item);
+  };
+
+  const handleClearCart = () => {
+    clearCart();
   };
 
   return (
@@ -81,6 +81,18 @@ const CartItemsTable = () => {
         </table>
       ) : (
         <p className="text-captions text-center text-xl">Cart is empty</p>
+      )}
+
+      {cartItems?.length > 0 && (
+        <div className="flex items-center justify-end my-3">
+          <button
+            type="button"
+            className="bg-cta px-8 py-1.5 text-primary-text cursor-pointer transition-all duration-200 shadow-md hover:shadow-cta"
+            onClick={handleClearCart}
+          >
+            Clear Cart
+          </button>
+        </div>
       )}
     </div>
   );

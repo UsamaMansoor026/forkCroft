@@ -7,6 +7,8 @@ import Story from "./Story";
 import Cart from "./Cart";
 import Login from "./Login";
 import Register from "./Register";
+import Checkout from "./Checkout";
+import Reservation from "./Reservation";
 
 export {
   Home,
@@ -18,4 +20,6 @@ export {
   Login,
   Register,
   Cart,
+  Checkout,
+  Reservation,
 };

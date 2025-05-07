@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useCartStore = create((set) => ({
+export const useCartStore = create((set, get) => ({
   cartItems: [],
   totalItems: 0,
   addToCart: (item) =>
@@ -45,4 +45,9 @@ export const useCartStore = create((set) => ({
         ),
       };
     }),
+
+  getSubTotal: () => {
+    const items = get().cartItems;
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  },
 }));

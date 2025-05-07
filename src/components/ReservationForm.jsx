@@ -1,17 +1,8 @@
 import React from "react";
-import { SectionHeading } from "./index";
 
 const ReservationForm = () => {
   return (
-    <form className="global-section py-10 px-4 md:px-10 bg-white/10 shadow-md shadow-white/40">
-      <SectionHeading
-        isCenter={true}
-        mainHeading="Book a table"
-        subHeading="Make Reservation"
-      />
-
-      <hr className="my-7" />
-
+    <form className="global-section py-10 px-4 md:px-10 bg-white/10 shadow-md shadow-white/40 max-w-[95%] md:max-w-[650px] mx-auto">
       {/* Input Container Name and Email field */}
       <div className="input-container flex items-center justify-between gap-4 mb-7">
         {/* Name */}

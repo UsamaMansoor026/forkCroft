@@ -100,20 +100,20 @@ const NavLinks = () => {
                 <li className="text-sm text-captions">{currentUser?.email}</li>
                 <hr />
                 <li>
-                  <a
-                    href="/orders"
+                  <Link
+                    to="/reservation"
                     className="text-primary block hover:underline"
                   >
                     Orders
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/tablereservation"
+                  <Link
+                    to="/reservation"
                     className="cursor-pointer text-primary text-left duration-200 hover:underline"
                   >
                     Book a table
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <button
