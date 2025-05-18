@@ -1,13 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SectionHeading } from "./index";
 import { motion } from "framer-motion";
 import { menuItems } from "../assets";
 import MenuItem from "./cards/MenuItem";
 import { Link } from "react-router-dom";
 import { NavigationContext } from "../context/NavigationContext";
+import axios from "axios";
 
 const Menu = () => {
   const { handleSetActiveLink } = useContext(NavigationContext);
+  const [filteredItems, setFilteredItems] = useState(null);
+
+  const fetchItems = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2632/api/menu/getallitems`
+      );
+      if (response.data.success) {
+        setFilteredItems(response.data.data.menuItems);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
   return (
     <section className="global-padding global-section">
@@ -18,7 +37,7 @@ const Menu = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-16">
-        {menuItems.slice(0, 6).map((item) => {
+        {filteredItems?.slice(0, 6).map((item) => {
           return <MenuItem item={item} />;
         })}
       </div>

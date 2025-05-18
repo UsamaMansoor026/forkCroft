@@ -8,6 +8,8 @@ const CartItemsTable = () => {
   const addToCart = useCartStore((state) => state.addToCart);
   const clearCart = useCartStore((state) => state.clearCart);
 
+  console.log("Cart Items: ", cartItems);
+
   const handleAddtoCart = (item) => {
     addToCart(item);
   };
@@ -45,9 +47,9 @@ const CartItemsTable = () => {
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap flex justify-center">
                   <img
-                    src={item.image}
+                    src={`http://localhost:2632/${item.image}`}
                     alt={item.name}
-                    className="h-10 w-10 rounded-full object-cover"
+                    className="w-16 rounded-full object-cover"
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
@@ -65,7 +67,7 @@ const CartItemsTable = () => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  ${item.discountPrice * item.quantity}
+                  ${(item.discountPrice * item.quantity).toFixed(2)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button

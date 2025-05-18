@@ -8,6 +8,8 @@ import {
   Home,
   Login,
   MenuPage,
+  Orders,
+  PaymentSuccess,
   Register,
   Reservation,
   Stories,
@@ -45,6 +47,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/reservation" element={<Reservation />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
         </Route>
 
         {/* AuthLayout */}

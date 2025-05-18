@@ -101,7 +101,7 @@ const NavLinks = () => {
                 <hr />
                 <li>
                   <Link
-                    to="/reservation"
+                    to="/orders"
                     className="text-primary block hover:underline"
                   >
                     Orders

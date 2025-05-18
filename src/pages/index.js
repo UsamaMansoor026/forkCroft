@@ -9,6 +9,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Checkout from "./Checkout";
 import Reservation from "./Reservation";
+import PaymentSuccess from "./PaymentSuccess";
+import Orders from "./Orders";
 
 export {
   Home,
@@ -21,5 +23,7 @@ export {
   Register,
   Cart,
   Checkout,
+  PaymentSuccess,
   Reservation,
+  Orders,
 };

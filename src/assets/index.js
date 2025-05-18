@@ -146,7 +146,7 @@ export const productsCategories = [
   "Main Dish",
   "Side Dish",
   "Salad",
-  "Dessert",
+  "Desserts",
 ];
 
 export const menuItems = [

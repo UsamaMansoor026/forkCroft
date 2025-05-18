@@ -20,15 +20,19 @@ const MenuItem = ({ item }) => {
   };
 
   const isItemInCart = (itemId) => {
-    return cartItems.some((cartItem) => cartItem.id === itemId);
+    return cartItems.some((cartItem) => cartItem._id === itemId);
   };
 
   return (
     <article
-      key={item.id}
+      key={item._id}
       className="flex bg-white/10 text-primary-text rounded-2xl shadow-lg h-[250px] overflow-hidden relative"
     >
-      <img src={item.image} alt="Dish" className="w-1/2 object-cover" />
+      <img
+        src={`http://localhost:2632/${item.image}`}
+        alt="Dish"
+        className="w-1/2 object-cover"
+      />
       <div className="px-4 py-6 w-1/2 flex flex-col justify-between">
         <div className="flex flex-col gap-1">
           <h3 className="text-lg font-bold">{item.name}</h3>
@@ -41,18 +45,18 @@ const MenuItem = ({ item }) => {
             $ {item.price}
           </span>
           <span className=" font-semibold text-base">
-            $ {item.discountPrice}
+            $ {item.discountPrice.toFixed(2)}
           </span>
         </div>
 
-        {isItemInCart(item.id) ? (
+        {isItemInCart(item._id) ? (
           <div className="flex items-center justify-between rounded-md overflow-hidden">
             <i
               className="fa-solid fa-minus bg-cta w-full text-center py-2.5 cursor-pointer rounded-l-md"
-              onClick={() => removeFromCart(item.id)}
+              onClick={() => removeFromCart(item._id)}
             />
             <p className="w-full text-center py-2.5">
-              {cartItems.find((cartItem) => cartItem.id === item.id)
+              {cartItems.find((cartItem) => cartItem._id === item._id)
                 ?.quantity || 1}
             </p>
             <i

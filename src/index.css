@@ -47,6 +47,24 @@ body {
   font-family: var(--font-poppins);
 }
 
+.table-scrollbar::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+.table-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-cta);
+  border-radius: 6px;
+}
+
+.table-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-tags);
+}
+
 option {
   background: var(--color-primary);
   color: var(--color-primary-text);

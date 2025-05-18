@@ -2,15 +2,43 @@ import React, { useContext } from "react";
 import { CartItemsTable, PageHeader } from "../components";
 import { NavigationContext } from "../context/NavigationContext";
 import { useCartStore } from "../store/store";
+import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Cart = () => {
   const { currentUser } = useContext(NavigationContext);
   const subTotal = useCartStore((state) => state.getSubTotal());
+  const itemsCount = useCartStore((state) => state.totalItems);
   const cartItems = useCartStore((state) => state.cartItems);
-  const deliveryCharge = 5.99; // you can adjust this value
 
-  const total = subTotal + deliveryCharge;
+  /* Stripe things */
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+  const onSubmit = async (data) => {
+    // console.log("Form Data: ", data);
+
+    const stripe = await stripePromise;
+    // console.log("Stripe: ", stripe);
+
+    // console.log("Cart Items: ", cartItems);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    try {
+      const response = await axios.post(
+        "http://localhost:2632/api/payment/create-checkout-session",
+        {
+          cartItems,
+        }
+      );
+
+      // toast.success("Payment Success");
+      window.location.href = response.data.url;
+    } catch (err) {
+      console.log("Error: ", err);
+      toast.error("Error Occured");
+    }
+  };
 
   return (
     <div>
@@ -29,25 +57,20 @@ const Cart = () => {
               <span>${subTotal.toFixed(2)}</span>
             </div>
 
-            <div className="flex justify-between mb-2">
-              <span>Delivery</span>
-              <span>${deliveryCharge}</span>
-            </div>
-
             <hr className="my-2" />
 
             <div className="flex justify-between font-semibold text-lg mb-4">
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>${subTotal.toFixed(2)}</span>
             </div>
 
-            <Link
-              to="/checkout"
-              // onClick={onCheckout}
+            <button
+              type="button"
+              onClick={onSubmit}
               className="bg-button text-white px-4 py-2 rounded-lg block text-center w-full hover:bg-button-hover transition cursor-pointer"
             >
               Proceed to Checkout
-            </Link>
+            </button>
           </div>
         )}
       </section>

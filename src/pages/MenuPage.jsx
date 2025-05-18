@@ -3,17 +3,27 @@ import { PageHeader } from "../components";
 import { menuItems, productsCategories } from "../assets";
 import MenuItem from "../components/cards/MenuItem";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const MenuPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filteredItems, setFilteredItems] = useState(menuItems);
+  const [filteredItems, setFilteredItems] = useState(null);
+
+  const fetchItems = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:2632/api/menu/getallitems?category=${selectedCategory}`
+      );
+      if (response.data.success) {
+        setFilteredItems(response.data.data.menuItems);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   useEffect(() => {
-    const filteredProducts =
-      selectedCategory === "All"
-        ? menuItems
-        : menuItems.filter((product) => product.category === selectedCategory);
-    setFilteredItems(filteredProducts);
+    fetchItems();
   }, [selectedCategory]);
 
   useEffect(() => {
@@ -42,23 +52,29 @@ const MenuPage = () => {
         ))}
       </div>
 
-      <div className="global-padding grid grid-cols-1 md:grid-cols-2 gap-4 my-16">
-        <AnimatePresence>
-          {filteredItems.map((item) => {
-            return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <MenuItem item={item} />
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+      {filteredItems?.length > 0 ? (
+        <div className="global-padding grid grid-cols-1 md:grid-cols-2 gap-4 my-16">
+          <AnimatePresence>
+            {filteredItems.map((item) => {
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <MenuItem key={item.id} item={item} />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      ) : (
+        <p className="text-xl text-center text-captions my-16">
+          No Products in this category
+        </p>
+      )}
     </>
   );
 };

@@ -1,61 +1,125 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { NavigationContext } from "../context/NavigationContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const ReservationForm = () => {
+  const { currentUser } = useContext(NavigationContext);
+  const [formData, setFormData] = useState({
+    customerName: "",
+    phoneNo: "",
+    date: "",
+    time: "",
+    persons: 0,
+    tableNo: 0,
+    userId: "",
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormData((prev) => ({ ...prev, userId: currentUser?.id }));
+    console.log("Form Data: ", formData);
+    console.log("User: ", currentUser);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:2632/api/reservation/add",
+        formData
+      );
+
+      console.log("Response: ", response);
+      if (!response.data.success) {
+        toast.error(response.data.message);
+      }
+
+      toast.success(response.data.message);
+    } catch (error) {
+      console.log("Error: ", error);
+      toast.error("Internal Server Error");
+    }
+  };
+
   return (
-    <form className="global-section py-10 px-4 md:px-10 bg-white/10 shadow-md shadow-white/40 max-w-[95%] md:max-w-[650px] mx-auto">
-      {/* Input Container Name and Email field */}
+    <form
+      onSubmit={handleSubmit}
+      className="global-section py-10 px-4 md:px-10 bg-white/10 shadow-md shadow-white/40 max-w-[95%] md:max-w-[650px] mx-auto"
+    >
+      {/* Input Container Name and Phone No field */}
       <div className="input-container flex items-center justify-between gap-4 mb-7">
         {/* Name */}
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="name" className="text-sm text-captions font-semibold">
+          <label
+            htmlFor="customerName"
+            className="text-sm text-captions font-semibold"
+          >
             Full Name
           </label>
           <input
             type="text"
-            name="name"
-            id="name"
+            name="customerName"
+            id="customerName"
             placeholder="Maan Mansoor"
             required
+            value={formData.customerName}
+            onChange={handleChange}
             className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
           />
         </div>
         {/* Email */}
         <div className="flex flex-col gap-1 w-full">
           <label
-            htmlFor="email"
-            className="text-sm text-captions font-semibold"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="example@gmail.com"
-            required
-            className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
-          />
-        </div>
-      </div>
-
-      {/* Input Container Phone and Date field */}
-      <div className="input-container flex items-center justify-between gap-4 mb-7">
-        {/* Phone */}
-        <div className="flex flex-col gap-1 w-full">
-          <label
-            htmlFor="phone"
+            htmlFor="phoneNo"
             className="text-sm text-captions font-semibold"
           >
             Phone No
           </label>
           <input
             type="tel"
-            name="phone"
-            id="phone"
-            placeholder="+92 300 1234567"
+            name="phoneNo"
+            id="phoneNo"
+            placeholder="+92 333 3333333"
             required
+            value={formData.phoneNo}
+            onChange={handleChange}
             className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
           />
+        </div>
+      </div>
+
+      {/* Input Container Table No and Date field */}
+      <div className="input-container flex items-center justify-between gap-4 mb-7">
+        {/* Table No */}
+        <div className="flex flex-col gap-1 w-full">
+          <label
+            htmlFor="tableNo"
+            className="text-sm text-captions font-semibold"
+          >
+            Table No
+          </label>
+          <select
+            id="tableNo"
+            required
+            value={formData.tableNo}
+            onChange={handleChange}
+            className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
+          >
+            <option value="" defaultChecked>
+              Select Table No
+            </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
         </div>
         {/* Date */}
         <div className="flex flex-col gap-1 w-full">
@@ -68,6 +132,8 @@ const ReservationForm = () => {
             id="date"
             placeholder="example@gmail.com"
             required
+            value={formData.date}
+            onChange={handleChange}
             className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
           />
         </div>
@@ -84,6 +150,8 @@ const ReservationForm = () => {
             name="time"
             id="time"
             required
+            value={formData.time}
+            onChange={handleChange}
             className="outline-none border bg-transparent border-primary-text text-primary-text px-2 py-1.5 placeholder:text-captions"
           >
             <option value="" defaultChecked>
@@ -111,15 +179,17 @@ const ReservationForm = () => {
         {/* Person */}
         <div className="flex flex-col gap-1 w-full">
           <label
-            htmlFor="person"
+            htmlFor="persons"
             className="text-sm text-captions font-semibold"
           >
             Person
           </label>
           <select
-            name="person"
-            id="person"
+            name="persons"
+            id="persons"
             required
+            value={formData.persons}
+            onChange={handleChange}
             className="outline-none border border-primary-text text-primary-text px-2 py-1.5"
           >
             <option value="" defaultChecked>
@@ -129,7 +199,10 @@ const ReservationForm = () => {
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="5+">5+</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
           </select>
         </div>
       </div>
@@ -137,7 +210,7 @@ const ReservationForm = () => {
       {/* Submit Button */}
       <button
         type="submit"
-        className="bg-button-hover w-full py-2.5 px-4 text-primary-text font-semibold rounded-md hover:bg-button transition-all duration-300 ease-in-out cursor-pointer"
+        className="bg-button w-full py-2.5 px-4 text-primary-text font-semibold rounded-md hover:shadow-md hover:shadow-button-hover transition-all duration-300 ease-in-out cursor-pointer"
       >
         Make Reservation
       </button>
