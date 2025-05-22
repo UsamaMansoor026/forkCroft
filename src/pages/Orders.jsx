@@ -30,8 +30,6 @@ const Orders = () => {
       );
 
       setUserOrders(response.data.data.userOrders);
-      console.log("Response: ", response.data);
-      toast.success("Orders Fetched");
     } catch (error) {
       console.log("Error: ", error);
       toast.error("Server Error");
@@ -62,8 +60,8 @@ const Orders = () => {
     <>
       <PageHeader heading="Orders" targetLink="Orders" />
 
-      <section className="global-padding global-section">
-        <table className="min-w-full text-sm text-white table-scrollbar overflow-x-auto bg-primary-text/10 rounded-lg p-4 mt-6">
+      <section className="global-padding global-section overflow-x-auto">
+        <table className="min-w-full text-sm text-white table-scrollbar bg-primary-text/10 rounded-lg p-4 mt-6">
           <thead>
             <tr className="text-left border-b border-captions text-captions">
               <th className="py-4 px-4">S. No</th>
@@ -83,7 +81,7 @@ const Orders = () => {
                   className="border-b border-captions duration-200 hover:bg-primary-text/40 cursor-pointer"
                 >
                   <td className="py-4 px-4">{index + 1}</td>
-                  <td className="py-4 px-4">{order._id}</td>
+                  <td className="py-4 px-4 whitespace-nowrap">{order._id}</td>
                   <td className="py-4 px-4">{order?.items.length}</td>
                   <td className="py-4 px-4">{order?.totalBill}</td>
                   <td className={`py-4 px-4 ${getStatusColor(order?.status)}`}>

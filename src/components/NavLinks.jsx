@@ -112,7 +112,7 @@ const NavLinks = () => {
                     to="/reservation"
                     className="cursor-pointer text-primary text-left duration-200 hover:underline"
                   >
-                    Book a table
+                    Reservations
                   </Link>
                 </li>
                 <li>

@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import { NavigationContext } from "../context/NavigationContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import SmallLoader from "./SmallLoader";
 
 const ReservationForm = () => {
+  const [loading, SetLoading] = useState(false);
   const { currentUser } = useContext(NavigationContext);
   const [formData, setFormData] = useState({
     customerName: "",
@@ -12,7 +14,6 @@ const ReservationForm = () => {
     time: "",
     persons: 0,
     tableNo: 0,
-    userId: "",
   });
 
   const handleChange = (e) => {
@@ -22,14 +23,24 @@ const ReservationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData((prev) => ({ ...prev, userId: currentUser?.id }));
-    console.log("Form Data: ", formData);
+    if (!currentUser?.id) {
+      toast.error("No User Found");
+      return;
+    }
+
+    const payload = {
+      ...formData,
+      userId: currentUser?.id,
+    };
+
+    console.log("Form Data: ", payload);
     console.log("User: ", currentUser);
 
     try {
+      SetLoading(true);
       const response = await axios.post(
         "http://localhost:2632/api/reservation/add",
-        formData
+        payload
       );
 
       console.log("Response: ", response);
@@ -41,6 +52,16 @@ const ReservationForm = () => {
     } catch (error) {
       console.log("Error: ", error);
       toast.error("Internal Server Error");
+    } finally {
+      setFormData({
+        customerName: "",
+        phoneNo: "",
+        date: "",
+        time: "",
+        persons: 0,
+        tableNo: 0,
+      });
+      SetLoading(false);
     }
   };
 
@@ -210,9 +231,11 @@ const ReservationForm = () => {
       {/* Submit Button */}
       <button
         type="submit"
-        className="bg-button w-full py-2.5 px-4 text-primary-text font-semibold rounded-md hover:shadow-md hover:shadow-button-hover transition-all duration-300 ease-in-out cursor-pointer"
+        className={`bg-button w-full py-2.5 px-4 text-primary-text font-semibold rounded-md hover:shadow-md hover:shadow-button-hover transition-all duration-300 ease-in-out cursor-pointer flex items-center gap-3 justify-center ${
+          loading ? "opacity-70" : "opacity-100"
+        }`}
       >
-        Make Reservation
+        Make Reservation {loading && <SmallLoader />}
       </button>
     </form>
   );
