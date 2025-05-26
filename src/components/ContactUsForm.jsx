@@ -1,61 +1,70 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { NavigationContext } from "../context/NavigationContext";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { apiUrls } from "../apiurls";
+import SmallLoader from "./SmallLoader";
 
 const ContactUsForm = () => {
+  const { currentUser } = useContext(NavigationContext);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      if (!currentUser) return;
+      const payload = {
+        message,
+        userId: currentUser?.id,
+      };
+      const response = await axios.post(`${apiUrls.addFeedbackAPI}`, payload);
+
+      if (!response.data.success) {
+        toast.error(response.data.message || "Failed to send message.");
+        return;
+      }
+
+      toast.success(response.data.message);
+    } catch (error) {
+      console.log("Error: ", error);
+      toast.error("Internal Server Error.");
+    } finally {
+      setLoading(false);
+      setMessage("");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3 className="font-semibold text-xl mb-6 text-primary-text">
-        Contact Us
+        Leave us a Feedback
       </h3>
 
-      {/* Input container Full Name */}
-      <div className="mb-8 flex flex-col gap-1">
-        <label htmlFor="name" className="text-sm text-captions">
-          Full Name:
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          required
-          placeholder="John Doe"
-          className="outline-none py-2 text-primary-text border-b-2 border-primary-text/50 focus:border-primary-text/100 transition-all duration-300 ease-in-out"
-        />
-      </div>
-
-      {/* Input container Email */}
-      <div className="mb-8 flex flex-col gap-1">
-        <label htmlFor="email" className="text-sm text-captions">
-          Email:
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          placeholder="johndoe@gmail.com"
-          className="outline-none py-2 text-primary-text border-b-2 border-primary-text/50 focus:border-primary-text/100 transition-all duration-300 ease-in-out"
-        />
-      </div>
-
       {/* Input container Message */}
-      <div className="mb-8 flex flex-col gap-1">
-        <label htmlFor="message" className="text-sm text-captions">
-          Message:
-        </label>
+      <div className="mb-8">
         <textarea
           name="message"
           id="message"
           required
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="Your message here..."
-          className="outline-none py-2 text-primary-text border-b-2 border-primary-text/50 focus:border-primary-text/100 transition-all duration-300 ease-in-out resize-y min-h-[90px]"
+          className="capitalize w-full outline-none p-3 text-primary-text border border-primary-text/50 focus:border-primary-text/100 transition-all duration-300 ease-in-out resize-y min-h-[150px]"
         />
       </div>
 
       <button
         type="submit"
-        className="py-2 bg-button w-full cursor-pointer duration-200 hover:bg-button-hover hover:shadow-md hover:shadow-button-hover"
+        className={`py-2 bg-button w-full duration-200 hover:bg-button-hover hover:shadow-md hover:shadow-button-hover flex justify-center items-center gap-3 ${
+          loading
+            ? "cursor-not-allowed opacity-80"
+            : "cursor-pointer opacity-100"
+        }`}
       >
-        Send Message
+        Send Message {loading && <SmallLoader />}
       </button>
     </form>
   );

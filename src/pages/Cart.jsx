@@ -6,6 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { apiUrls } from "../apiurls";
 
 const Cart = () => {
   const { currentUser } = useContext(NavigationContext);
@@ -25,12 +26,9 @@ const Cart = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
     try {
-      const response = await axios.post(
-        "http://localhost:2632/api/payment/create-checkout-session",
-        {
-          cartItems,
-        }
-      );
+      const response = await axios.post(`${apiUrls.paymentAPI}`, {
+        cartItems,
+      });
 
       // toast.success("Payment Success");
       window.location.href = response.data.url;

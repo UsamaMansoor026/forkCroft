@@ -6,6 +6,7 @@ import MenuItem from "./cards/MenuItem";
 import { Link } from "react-router-dom";
 import { NavigationContext } from "../context/NavigationContext";
 import axios from "axios";
+import { apiUrls } from "../apiurls";
 
 const Menu = () => {
   const { handleSetActiveLink } = useContext(NavigationContext);
@@ -13,9 +14,7 @@ const Menu = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:2632/api/menu/getallitems`
-      );
+      const response = await axios.get(`${apiUrls.fetchAllMenuItemsAPI}`);
       if (response.data.success) {
         setFilteredItems(response.data.data.menuItems);
       }

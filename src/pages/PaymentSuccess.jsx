@@ -3,6 +3,7 @@ import { NavigationContext } from "../context/NavigationContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { apiUrls } from "../apiurls";
 
 const PaymentSuccess = () => {
   const { currentUser } = useContext(NavigationContext);
@@ -12,13 +13,10 @@ const PaymentSuccess = () => {
     try {
       console.log("Items: ", items);
       console.log("User Id: ", currentUser?.id);
-      const response = await axios.post(
-        "http://localhost:2632/api/order/placeorder",
-        {
-          userId: currentUser.id,
-          items,
-        }
-      );
+      const response = await axios.post(`${apiUrls.placeOrderAPI}`, {
+        userId: currentUser.id,
+        items,
+      });
 
       console.log("Order placed:", response);
       localStorage.removeItem("cartItems");

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { NavigationContext } from "../context/NavigationContext";
+import { apiUrls } from "../apiurls";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,10 +30,7 @@ const Register = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:2632/api/auth/register",
-        data
-      );
+      const response = await axios.post(`${apiUrls.registerAPI}`, data);
       console.log("Response: ", response);
       if (response.status !== 201) return toast.error(response.data.message);
       toast.success(response.data.message);

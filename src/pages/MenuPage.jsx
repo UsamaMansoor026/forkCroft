@@ -4,6 +4,7 @@ import { menuItems, productsCategories } from "../assets";
 import MenuItem from "../components/cards/MenuItem";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { backendURL } from "../apiurls";
 
 const MenuPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -12,7 +13,7 @@ const MenuPage = () => {
   const fetchItems = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:2632/api/menu/getallitems?category=${selectedCategory}`
+        `${backendURL}/menu/getallitems?category=${selectedCategory}`
       );
       if (response.data.success) {
         setFilteredItems(response.data.data.menuItems);

@@ -3,6 +3,7 @@ import { NavigationContext } from "../context/NavigationContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import SmallLoader from "./SmallLoader";
+import { apiUrls } from "../apiurls";
 
 const ReservationForm = () => {
   const [loading, SetLoading] = useState(false);
@@ -39,7 +40,7 @@ const ReservationForm = () => {
     try {
       SetLoading(true);
       const response = await axios.post(
-        "http://localhost:2632/api/reservation/add",
+        `${apiUrls.addReservationAPI}`,
         payload
       );
 

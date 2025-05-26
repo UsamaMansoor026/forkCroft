@@ -3,6 +3,7 @@ import { PageHeader, ReservationForm } from "../components";
 import { NavigationContext } from "../context/NavigationContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { apiUrls } from "../apiurls";
 
 const Reservation = () => {
   const { currentUser } = useContext(NavigationContext);
@@ -38,7 +39,7 @@ const Reservation = () => {
       const id = currentUser?.id;
 
       const response = await axios.get(
-        `http://localhost:2632/api/reservation/user/${id}`
+        `${apiUrls.fetchUserReservationsAPI}/${id}`
       );
       console.log("Reservations: ", response.data);
       if (!response.data.success && response.data.reservations.length === 0) {

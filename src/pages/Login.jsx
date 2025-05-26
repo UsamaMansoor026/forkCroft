@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { NavigationContext } from "../context/NavigationContext";
+import { apiUrls } from "../apiurls";
 
 const Login = () => {
   const { loginUser } = useContext(NavigationContext);
@@ -27,10 +28,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:2632/api/auth/login",
-        data
-      );
+      const response = await axios.post(`${apiUrls.loginAPI}`, data);
       console.log("Response: ", response);
       if (response.status === 200) {
         loginUser(response.data.user);

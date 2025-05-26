@@ -3,6 +3,7 @@ import { PageHeader } from "../components";
 import { NavigationContext } from "../context/NavigationContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { apiUrls } from "../apiurls";
 
 const Orders = () => {
   const { currentUser } = useContext(NavigationContext);
@@ -26,7 +27,7 @@ const Orders = () => {
       const userId = currentUser?.id;
 
       const response = await axios.get(
-        `http://localhost:2632/api/order/getorders/${userId}`
+        `${apiUrls.fetchUserOrdersAPI}/${userId}`
       );
 
       setUserOrders(response.data.data.userOrders);

@@ -73,13 +73,6 @@ const MenuItem = ({ item }) => {
             Order Now
           </button>
         )}
-
-        {/* Quantity Controls */}
-        {/* <div className="flex items-center justify-between rounded-md overflow-hidden">
-          <i className="fa-solid fa-minus bg-cta w-full text-center py-2.5 cursor-pointer rounded-l-md"></i>
-          <p className="w-full text-center py-2.5">1</p>
-          <i className="fa-solid fa-plus bg-cta w-full text-center py-2.5 cursor-pointer rounded-r-md"></i>
-        </div> */}
       </div>
     </article>
   );
